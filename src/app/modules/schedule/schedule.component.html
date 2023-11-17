@@ -1,31 +1,39 @@
 <div>
-    <div class="container-fluid">
-        <div class="row my-4">
-            <div class="col-lg-9 mx-auto text-center">
-                <h4>AGENDA TU CITA</h4>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-9 mx-auto my-8">
-                <table class="table table-bordered table-striped table-hover">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">DIA</th>
-                            <th scope="col">HORA</th>
-                            <th scope="col">DURACION</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let item of items; let i = index">
-                            <th scope="row">{{i+1}}</th>
-                            <td>{{item.day| uppercase}}</td>
-                            <td>{{item.hour | uppercase}}</td>
-                            <td>{{item.duration }}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+  <div class="container-fluid">
+    <div class="row my-4">
+      <div class="col-lg-9 mx-auto text-center">
+        <h4>AGENDA TU CITA</h4>
+      </div>
     </div>
+    <div class="row my-2">
+      <div class="col-lg-3 mx-auto my-8">
+        <label for="daySelect">Selecciona un día:</label>
+        <select
+          id="daySelect"
+          class="form-control"
+          [(ngModel)]="selectedDay"
+          (change)="onDaySelectChange()"
+        >
+          <option *ngFor="let item of itemsSelect" [value]="item">
+            {{ item.toString()| uppercase }}
+          </option>
+        </select>
+      </div>
+      <div class="col-lg-3 mx-auto my-8">
+        Citas Disponible : {{dayAvailable}}
+      </div>
+      <div class="row my-2">
+        <div class="col-lg-9 mx-auto my-8">
+          <div class="card">
+            <div class="card-body">
+              <full-calendar
+                #calendar
+                [options]="calendarOptions"
+              ></full-calendar>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
